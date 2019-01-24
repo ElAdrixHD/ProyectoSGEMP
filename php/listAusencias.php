@@ -3,11 +3,10 @@ include_once("app.php");
 session_start();
 $app= new App();
 $app->validateSesion();
-$get = $_GET['id'];
-if(isset($get)){
-    $resultset = $app->getNombreStudent($get);
+if(isset($_GET['id'])){
+    $resultset = $app->getNombreStudent($_GET['id']);
     App::print_init("Faltas de ".$resultset->fetch()['nombre']);
-    $result = $app->getFaltasDeUsuario($get);
+    $result = $app->getFaltasDeUsuario($_GET['id']);
 }else{
     App::print_init("Faltas de asistencia");
     $result = $app->getFaltas();

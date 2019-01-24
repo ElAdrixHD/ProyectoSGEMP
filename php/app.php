@@ -73,7 +73,10 @@ class App{
 
     public function validateSesion()
     {
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
         if(!$this->isLogged())
             $this->showLogin();
     }
@@ -90,7 +93,10 @@ class App{
 
     public function invalidateSession()
     {
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
         if($this->isLogged()){
             unset($_SESSION['user']);
             session_destroy();
