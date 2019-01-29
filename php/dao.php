@@ -8,6 +8,8 @@ define("COLUMN_USER","user");
 define("COLUMN_PASS","password");
 define("TABLE_STUDENT", "alumno");
 define("TABLE_FALTAS", "falta");
+define("COLUMN_ID_ALUMNO", "id_alumno");
+define("COLUMN_ID", "id");
     class Dao{
         private $conn;
         public $error;
@@ -49,7 +51,7 @@ define("TABLE_FALTAS", "falta");
         public function getNombreStudent($id)
         {
             try {
-                $sql = "SELECT nombre FROM " . TABLE_STUDENT . " WHERE id =" . $id;
+                $sql = "SELECT nombre FROM " . TABLE_STUDENT . " WHERE ".COLUMN_ID." = " . $id;
                 $resultset = $this->conn->query($sql);
                 return $resultset;
             } catch (PDOException $e) {
@@ -60,9 +62,28 @@ define("TABLE_FALTAS", "falta");
         public function getFaltasDeUsuario($id)
         {
             try{
-                $sql="SELECT * FROM ".TABLE_FALTAS." WHERE id_alumno=".$id;
-                $resultset = $this->conn->query($sql);
-                return $resultset;
+
+                $sql="SELECT * FROM ".TABLE_FALTAS." WHERE ".COLUMN_ID_ALUMNO." = :id_alumno";
+                $statement=$this->conn->prepare($sql);
+                $statement->bindParam(":id_alumno",$id);
+                $statement->execute();
+                return $statement;
+
+
+                /*
+                 $sql="SELECT * FROM ".TABLE_FALTAS." WHERE ".COLUMN_ID_ALUMNO." = :id_alumno";
+                 $statement=$this->conn->prepare($sql);
+                 $statement->execute(array(":id_alumno"=>$id));
+                 return $statement;
+                 */
+
+                /*
+                 $sql="SELECT * FROM ".TABLE_FALTAS." WHERE ".COLUMN_ID_ALUMNO." = ?";
+                 $statement=$this->conn->prepare($sql);
+                 $statement->execute(array($id));
+                 return $statement;
+                */
+
             }catch (PDOException $e){
                 $this->error = $e->getMessage();
             }
