@@ -51,9 +51,10 @@ define("COLUMN_ID", "id");
         public function getNombreStudent($id)
         {
             try {
-                $sql = "SELECT nombre FROM " . TABLE_STUDENT . " WHERE ".COLUMN_ID." = " . $id;
-                $resultset = $this->conn->query($sql);
-                return $resultset;
+                $sql = "SELECT nombre FROM " . TABLE_STUDENT . " WHERE ".COLUMN_ID." = ?";
+                $statement=$this->conn->prepare($sql);
+                $statement->execute(array($id));
+                return $statement;
             } catch (PDOException $e) {
                 $this->error = $e->getMessage();
             }

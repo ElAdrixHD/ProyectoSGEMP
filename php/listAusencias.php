@@ -1,6 +1,5 @@
 <?php
 include_once("app.php");
-session_start();
 $app= new App();
 $app->validateSesion();
 if(isset($_GET['id'])){

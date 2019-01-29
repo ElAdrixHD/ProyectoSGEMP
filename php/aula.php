@@ -1,7 +1,6 @@
 <?php
 include_once("app.php");
 $app= new App();
-session_start();
 $app->validateSesion();
 App::print_init("Gestion de aulas");
 App::nav_aula();
