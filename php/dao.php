@@ -10,6 +10,7 @@ define("TABLE_STUDENT", "alumno");
 define("TABLE_FALTAS", "falta");
 define("COLUMN_ID_ALUMNO", "id_alumno");
 define("COLUMN_ID", "id");
+define("MODULE_TABLE", "modulo");
     class Dao{
         private $conn;
         public $error;
@@ -94,6 +95,17 @@ define("COLUMN_ID", "id");
         {
             try{
                 $sql="SELECT * FROM ".TABLE_FALTAS;
+                $resultset = $this->conn->query($sql);
+                return $resultset;
+            }catch (PDOException $e){
+                $this->error = $e->getMessage();
+            }
+        }
+
+        public function getModulos()
+        {
+            try{
+                $sql="SELECT * FROM ".MODULE_TABLE;
                 $resultset = $this->conn->query($sql);
                 return $resultset;
             }catch (PDOException $e){

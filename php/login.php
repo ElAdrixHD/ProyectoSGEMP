@@ -10,11 +10,11 @@ App::print_init("Inicio Sesion");
             <form method="POST" action="login.php">
             <div class="form-group">
                 <label for="user">Usuario:</label>
-                <input id="user" name="user" type="text" autofocus="autofocus" require="required" class="form-control"/>
+                <input id="user" name="user" type="text" autofocus="autofocus" required="required" class="form-control"/>
             </div>
             <div class="form-group">
                 <label for="pass">Contraseña:</label>
-                <input id="pass" name="pass" type="password" require="required" class="form-control"/>
+                <input id="pass" name="pass" type="password" required="required" class="form-control"/>
             </div>
                 <input type="submit" value="Iniciar Sesion" class="btn btn-primary"/>
                 <p></p>

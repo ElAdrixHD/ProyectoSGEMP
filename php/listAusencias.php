@@ -2,40 +2,65 @@
 include_once("app.php");
 $app= new App();
 $app->validateSesion();
-if(isset($_GET['id'])){
-    $resultset = $app->getNombreStudent($_GET['id']);
-    App::print_init("Faltas de ".$resultset->fetch()['nombre']);
-    $result = $app->getFaltasDeUsuario($_GET['id']);
-}else{
-    App::print_init("Faltas de asistencia");
-    $result = $app->getFaltas();
-}
-App::nav_aula();
-if(!$result){
-    echo "<p>Error al conectar al servidor: ".$app->getDao()->error."</p>";
-}else{
-    $list= $result->fetchAll();
-    if (count($list)==0){
-        echo "<p>No hay alumnos</p>";
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if(isset($_GET['id'])){
+        $resultset = $app->getNombreStudent($_GET['id']);
+        App::print_init("Faltas de ".$resultset->fetch()['nombre']);
+        $resultGET = $app->getFaltasDeUsuario($_GET['id']);
     }else{
-        echo "<table class=\"table table-striped table-dark\">";
-        echo "<thead>";
-        echo "<tr>";
-        for ($i = 0; $i<$result->columnCount();$i++){
-            $namecolumn = $result->getColumnMeta($i);
-            echo "<th>".strtoupper($namecolumn['name'])."</th>";
-        }
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        foreach ($list as $fila){
-            echo "<tr>";
-            echo "<td>".$fila['id_alumno']."</td><td>".$fila['id_modulo']."</td><td>".$fila['date']."</td><td>".$fila['justificada']."</td><td>".$fila['descripcion']."</td>";
-            echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
+        App::print_init("Faltas de asistencia");
+        $resultGET = $app->getFaltas();
     }
+    App::nav_aula();
+    App::mostrarTabla($resultGET);
+
+}
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $id_alumno = $_POST['seleccion_alum'];
+    $id_modulo = $_POST['seleccion_mod'];
+    $fechaDesde = $_POST['dateA'];
+    $fechaHasta = $_POST['dateP'];
+
+    echo "<p>".$id_alumno."</p>";
+    echo "<p>".$id_modulo."</p>";
+    echo "<p>".$fechaDesde."</p>";
+    echo "<p>".$fechaHasta."</p>";
+
+    if(isset($id_alumno)){
+
+    }elseif(isset($id_alumno,$id_modulo)){
+
+    }elseif(isset($id_alumno,$fechaDesde)){
+
+    }elseif(isset($id_alumno,$fechaHasta)){
+
+    }elseif(isset($id_alumno,$id_modulo,$fechaDesde)){
+
+    }elseif(isset($id_alumno,$id_modulo,$fechaHasta)){
+
+    }elseif(isset($id_alumno,$fechaDesde,$fechaHasta)){
+
+    }elseif(isset($id_alumno,$id_modulo,$fechaDesde,$fechaHasta)){
+
+    }elseif(isset($id_modulo)){
+
+    }elseif(isset($id_modulo,$fechaDesde)){
+
+    }elseif(isset($id_modulo,$fechaHasta)){
+
+    }elseif(isset($id_modulo,$fechaDesde,$fechaHasta)){
+
+    }elseif(isset($fechaDesde)){
+
+    }elseif(isset($fechaDesde,$fechaHasta)){
+
+    }elseif(isset($fechaHasta)){
+
+    }else{
+
+    }
+
 }
 
 App::print_footer();
+
