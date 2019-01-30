@@ -26,40 +26,39 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     echo "<p>".$fechaDesde."</p>";
     echo "<p>".$fechaHasta."</p>";
 
-    if(isset($id_alumno)){
-
-    }elseif(isset($id_alumno,$id_modulo)){
-
-    }elseif(isset($id_alumno,$fechaDesde)){
-
-    }elseif(isset($id_alumno,$fechaHasta)){
-
-    }elseif(isset($id_alumno,$id_modulo,$fechaDesde)){
-
-    }elseif(isset($id_alumno,$id_modulo,$fechaHasta)){
-
-    }elseif(isset($id_alumno,$fechaDesde,$fechaHasta)){
-
-    }elseif(isset($id_alumno,$id_modulo,$fechaDesde,$fechaHasta)){
-
-    }elseif(isset($id_modulo)){
-
-    }elseif(isset($id_modulo,$fechaDesde)){
-
-    }elseif(isset($id_modulo,$fechaHasta)){
-
-    }elseif(isset($id_modulo,$fechaDesde,$fechaHasta)){
-
-    }elseif(isset($fechaDesde)){
-
-    }elseif(isset($fechaDesde,$fechaHasta)){
-
-    }elseif(isset($fechaHasta)){
-
+    if(!!empty($id_alumno)&&!empty($id_modulo)&&!empty($fechaDesde)&&!empty($fechaHasta)){
+        echo "1,2,3,4";
+    }elseif(!empty($id_alumno)&&!empty($id_modulo)&&!empty($fechaDesde)){
+        echo "1,2,3";
+    }elseif(!empty($id_alumno)&&!empty($id_modulo)&&!empty($fechaHasta)){
+        echo "1,2,4";
+    }elseif(!empty($id_alumno)&&!empty($fechaDesde)&&!empty($fechaHasta)){
+        echo "1,3,4";
+    }elseif(!empty($id_modulo)&&!empty($fechaDesde)&&!empty($fechaHasta)){
+        echo "2,3,4";
+    }elseif(!empty($id_alumno)&&!empty($id_modulo)){
+        echo "1,2";
+    }elseif(!empty($id_alumno)&&!empty($fechaDesde)){
+        echo "1,3";
+    }elseif(!empty($id_alumno)&&!empty($fechaHasta)){
+        echo "1,4";
+    }elseif(!empty($id_modulo)&&!empty($fechaDesde)){
+        echo "2,3";
+    }elseif(!empty($id_modulo)&&!empty($fechaHasta)){
+        echo "2,4";
+    }elseif(!empty($fechaDesde)&&!empty($fechaHasta)){
+        echo "3,4";
+    }elseif(!empty($id_alumno)){
+        echo "1";
+    }elseif(!empty($id_modulo)){
+        echo "2";
+    }elseif(!empty($fechaDesde)){
+        echo "3";
+    }elseif(!empty($fechaHasta)){
+        echo "4";
     }else{
-
+        echo "0";
     }
-
 }
 
 App::print_footer();

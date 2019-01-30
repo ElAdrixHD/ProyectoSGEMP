@@ -24,7 +24,7 @@ App::nav_aula();
                 </select>
             </div>
             <div class="form-group">
-                <div class="col-md-16">
+                <div class="col-md-8">
                     <div class="form-group row">
                         <label for="dateA" class="col-md-1 control-label">Desde</label>
                         <div class="col-md-5">
