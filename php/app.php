@@ -39,7 +39,6 @@ class App{
         </a>
         <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">
           <a class=\"dropdown-item\" href=\"#\">Añadir</a>
-          <a class=\"dropdown-item\" href=\"listAusencias.php\">Listar</a>
           <a class=\"dropdown-item\" href=\"buscarAusencias.php\">Buscar</a>
         </div>
       </li>
@@ -47,10 +46,6 @@ class App{
         <a class=\"nav-link\" href=\"logout.php\">Cerrar Sesion</a>
       </li>
     </ul>
-    <form class=\"form-inline my-2 my-lg-0\">
-      <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">
-      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>
-    </form>
   </div>
 </nav>";
     }
@@ -61,35 +56,6 @@ class App{
         </footer>
       </body>  
     </html>";
-    }
-
-    static function mostrarTabla($result){
-        if(!$result){
-            echo "<p>Error al conectar al servidor: ".$app->getDao()->error."</p>";
-        }else{
-            $list= $result->fetchAll();
-            if (count($list)==0){
-                echo "<p>No hay alumnos</p>";
-            }else{
-                echo "<table class=\"table table-striped table-dark\">";
-                echo "<thead>";
-                echo "<tr>";
-                for ($i = 0; $i<$result->columnCount();$i++){
-                    $namecolumn = $result->getColumnMeta($i);
-                    echo "<th>".strtoupper($namecolumn['name'])."</th>";
-                }
-                echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                foreach ($list as $fila){
-                    echo "<tr>";
-                    echo "<td>".$fila['id_alumno']."</td><td>".$fila['id_modulo']."</td><td>".$fila['date']."</td><td>".$fila['justificada']."</td><td>".$fila['descripcion']."</td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-            }
-        }
     }
 
     function getDao(){
@@ -151,6 +117,15 @@ class App{
     public function getModulos()
     {
         return $this->getDao()->getModulos();
+    }
+    public function getModuloPorID($id)
+    {
+        return $this->getDao()->getModuloPorID($id);
+    }
+
+    public function getFaltasPOST($id_al = "", $id_mod = "", $fechaD = "", $fechaH = "")
+    {
+        return $this->getDao()->getFaltasPOST($id_al,$id_mod,$fechaD,$fechaH);
     }
 }
 ?>

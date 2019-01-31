@@ -112,5 +112,29 @@ define("MODULE_TABLE", "modulo");
                 $this->error = $e->getMessage();
             }
         }
+
+        public function getModuloPorID($id)
+        {
+            $sql="SELECT * FROM ".MODULE_TABLE." WHERE ".COLUMN_ID." = :id_mod";
+            $statement=$this->conn->prepare($sql);
+            $statement->bindParam(":id_mod",$id);
+            $statement->execute();
+            return $statement;
+        }
+
+        public function getFaltasPOST($id_al, $id_mod, $fechaD, $fechaH)
+        {
+            $sql = "SELECT * FROM falta WHERE ".$id_al." ".$id_mod." ".$fechaD." ".$fechaH;
+            //echo $sql;
+            //$sql="SELECT * FROM ".TABLE_FALTAS." WHERE :id_al :id_mod :fechaD :fechaH";
+            $statement=$this->conn->prepare($sql);
+            //$statement->bindParam(":id_alumno",$id_al);
+            //$statement->bindParam(":id_mod",$id_mod);
+            //$statement->bindParam(":fechaD",$fechaD);
+            //$statement->bindParam(":fechaH",$fechaH);
+            //$statement->execute(array(":id_al"=>$id_al,":id_mod"=>$id_mod,":fechaD"=>$fechaD,":fechaH"=>$fechaH));
+            $statement->execute();
+            return $statement;
+        }
     }
 ?>
