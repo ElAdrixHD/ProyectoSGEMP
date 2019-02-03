@@ -1,6 +1,5 @@
 <?php
 include_once("app.php");
-$app = new App();
 session_start();
 App::print_init("Inicio Sesion");
 ?>

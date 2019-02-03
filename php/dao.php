@@ -20,7 +20,7 @@ define("MODULE_TABLE", "modulo");
                 $this->conn=new PDO(DSN,USER,PASSWORD);
             }catch(PDOException $e){
                 //Gestionamos el catch
-                $this->error="Error en la conexion: ".$e.getMessage();
+                $this->error="Error en la conexion: ".$e->getMessage();
             }
         }
 
