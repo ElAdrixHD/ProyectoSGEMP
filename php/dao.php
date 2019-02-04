@@ -2,7 +2,7 @@
 define("DATABASE","aula");
 define("DSN","mysql:host=localhost;dbname=".DATABASE);
 define("USER","www-data");
-define("PASSWORD","password");
+define("PASSWORD","123");
 define("TABLE_USER","user");
 define("COLUMN_USER","user");
 define("COLUMN_PASS","password");

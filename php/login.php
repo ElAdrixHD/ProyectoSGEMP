@@ -22,7 +22,7 @@ App::print_init("Inicio Sesion");
     </div>
 </div>
 <?php
-
+$app = new App();
 if ($app->isLogged()){
     echo "<script language=\"javascript\">window.location.href=\"aula.php\"</script>";
 }else{
